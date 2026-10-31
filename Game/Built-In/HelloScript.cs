@@ -11,8 +11,8 @@ public class HelloScript : Script
 
     public void PrintGameAuthor()
     {
-        string gamename = Config.Get("./Game/config/meta.cfg", "GAME_NAME");
-        string gamecopy = Config.Get("./Game/config/meta.cfg", "GAME_COPYRIGHT");
+        string gamename = Config.Get("meta.cfg", "GAME_NAME");
+        string gamecopy = Config.Get("meta.cfg", "GAME_COPYRIGHT");
         
         Console.WriteLine($"Game: {gamename}\n{gamecopy}");
     }
