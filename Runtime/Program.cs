@@ -8,20 +8,24 @@ class Program
     {
         PrintStartMessage();
 
-        try {
+        try 
+        {
             int width = Config.GetInt("window.cfg", "WINDOW_WIDTH");
             int height = Config.GetInt("window.cfg", "WINDOW_HEIGHT");
             string title = Config.GetBool("window.cfg", "GAME_NAME_AS_WINDOW_TITLE")
                 ? Config.GetString("meta.cfg", "GAME_NAME")
                 : Config.GetString("window.cfg", "CUSTOM_WINDOW_TITLE");
 
-
-            Logger.Info("Runtime", "Starting engine...");
             var engine = new EngineRuntime(width, height, title);
             ScriptLoader.LoadScripts(Assembly.Load("Game"), engine.Scripts);
+
+            Logger.Info("Runtime", "Starting main loop...\n");
             engine.Run();
+
             return 0;
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
             Logger.Exception(ex);
             return 1;
         }

@@ -6,6 +6,7 @@ public static class ScriptLoader
 {
     public static int LoadScripts(Assembly assembly, ScriptHost host)
     {
+        Logger.Info("ScriptLoader", $"Loading scripts...");
         var count = 0;
 
         foreach (var type in assembly.GetTypes())
