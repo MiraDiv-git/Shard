@@ -4,7 +4,11 @@ public static class Config
 {
     public static string Get(string path, string key)
     {
-        foreach (var raw in File.ReadLines("./Game/config/" + path))
+        var targetPath = "./Game/config/" + path;
+        if (!File.Exists(targetPath))
+            throw new EngineException($"Config: file '{targetPath}' not found");
+            
+        foreach (var raw in File.ReadLines(targetPath))
         {
             var line = raw.Trim();
             if (line.Length == 0 || line[0] is ';' or '#' or '[') continue;
@@ -16,6 +20,6 @@ public static class Config
                 return line[(eq + 1)..].Trim().Trim('"');
         }
 
-        throw new Exception($"Key '{key}' not found in {path}");
+        throw new EngineException($"Config: key '{key}' not found in {targetPath}");
     }
 }
