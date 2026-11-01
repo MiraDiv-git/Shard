@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Engine\Engine.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="config\**\*" />
+  </ItemGroup>
+
 </Project>

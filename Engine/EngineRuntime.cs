@@ -14,17 +14,15 @@ public class EngineRuntime
 
     public ScriptHost Scripts { get; } = new();
 
-    public EngineRuntime(IRenderer? renderer = null)
+    public EngineRuntime(int width = 1280, int height = 720, string title = "Shard Engine", IRenderer? renderer = null)
     {
-        _renderer = renderer ?? new GlRenderer(1280, 720, "Shard Engine");
+        _renderer = renderer ?? new GlRenderer(width, height, title);
     }
 
     public void Stop() => _running = false;
 
     public void Run()
     {
-        EngineDebug.PrintStartMessage();
-
         const double fixedDeltaTime = 1.0 / 60.0;
         const double maxFrameTime = 0.25;
 
@@ -53,21 +51,12 @@ public class EngineRuntime
             if (_renderer is GlRenderer gr && gr.Window.ShouldClose)
             {
                 _running = false;
-                Logger.Info("Window", "Close requested, shutting down...");
+                Logger.Info("EngineRuntime", "Close requested, shutting down...");
             }
 
             Thread.Sleep(1);
         }
 
         Scripts.Shutdown();
-    }
-}
-
-public static class EngineDebug
-{
-    public static void PrintStartMessage()
-    {
-        Logger.Quote("Shard Engine v 0.1.0");
-        Logger.Quote("(c) 2026 MiraDiv. All rights reserved.\n");
     }
 }
