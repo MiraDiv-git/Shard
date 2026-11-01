@@ -14,6 +14,6 @@ public class HelloScript : Script
         string gamename = Config.Get("meta.cfg", "GAME_NAME");
         string gamecopy = Config.Get("meta.cfg", "GAME_COPYRIGHT");
         
-        Console.WriteLine($"Game: {gamename}\n{gamecopy}");
+        Logger.Quote($"Game: {gamename}\n{gamecopy}\n");
     }
 }
