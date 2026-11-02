@@ -14,4 +14,8 @@
     <EmbeddedResource Include="config\**\*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Test\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
