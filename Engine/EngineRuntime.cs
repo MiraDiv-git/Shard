@@ -46,12 +46,21 @@ public class EngineRuntime
                 accumulator -= fixedDeltaTime;
             }
 
-            _renderer.Render((float)(accumulator / fixedDeltaTime));
-
-            if (_renderer is GlRenderer gr && gr.Window.ShouldClose)
+            if (_renderer is GlRenderer gr)
             {
-                _running = false;
-                Logger.Info("EngineRuntime", "Close requested, shutting down...");
+                gr.Clear();
+                Scripts.Draw(gr.Batch);
+                gr.Present();
+
+                if (gr.Window.ShouldClose)
+                {
+                    _running = false;
+                    Logger.Info("EngineRuntime", "Close requested, shutting down...");
+                }
+            }
+            else
+            {
+                _renderer.Render((float)(accumulator / fixedDeltaTime));
             }
 
             Thread.Sleep(1);

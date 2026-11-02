@@ -34,6 +34,12 @@ public sealed class ScriptHost
             _updatable[i].Update(dt);
     }
 
+    public void Draw(SpriteBatch batch)
+    {
+        for (var i = 0; i < _all.Count; i++)
+            _all[i].Draw(batch);
+    }
+
     public void Shutdown()
     {
         for (var i = _all.Count - 1; i >= 0; i--)

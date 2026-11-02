@@ -1,4 +1,5 @@
 using Silk.NET.GLFW;
+using Silk.NET.OpenGL;
 
 namespace Engine;
 
@@ -22,6 +23,12 @@ public class Window : IDisposable
         }
 
         _glfw.MakeContextCurrent(_handle);
+        _glfw.SwapInterval(1);
+    }
+
+    public unsafe GL CreateGL()
+    {
+        return GL.GetApi(name => (nint)_glfw.GetProcAddress(name));
     }
 
     public void PollEvents() => _glfw.PollEvents();
